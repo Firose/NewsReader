@@ -1,0 +1,7 @@
+<div class="container">
+  <h3><%= @new.title %></h3>
+  <i>published on <%= @new.published %> by <%= @new.author %></i>
+  <p>
+    <%= @new.content.html_safe %>
+  </p>
+</div>

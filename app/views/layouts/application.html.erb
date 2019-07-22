@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>NewsReader</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <!-- <link rel="stylesheet" type="text/css" href="DataTables/datatables.css"/>
+    <script type="text/javascript" src="DataTables/datatables.js"></script> -->
+  </head>
+
+  <body>
+    <%= yield %>
+  </body>
+</html>
