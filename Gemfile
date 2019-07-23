@@ -7,7 +7,7 @@ gem 'yaml_db'
 gem 'taps'
 gem 'safe_attributes'
 gem 'jquery-rails'
-gem 'bootstrap-sass', '~> 3.2.0'
+gem "bootstrap-sass", ">= 3.4.1"
 gem 'autoprefixer-rails'
 gem 'kaminari'
 gem 'pg_search'
