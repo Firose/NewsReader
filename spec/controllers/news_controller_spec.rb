@@ -3,28 +3,50 @@ require 'rails_helper'
 RSpec.describe NewsController, type: :controller do
 	render_views
   describe '#index' do
-    it 'should display first 10 records at initial' do
-    	get :index
-    	expect(assigns(:news).count).to eq(10)
+  	it 'should display records based on search values' do
+    	@new = FactoryBot.create(:new, title: 'Firose')
+    	@new = FactoryBot.create(:new, title: 'rose')
+    	get :index, params: {term: 'firose'}
+    	expect(assigns(:news).count).to eq(1)
+    	expect(New.all.count).to eq(274)
     end
 
-    it 'should display values according to page number' do
+     it 'should display values according to page number' do
     	get :index, params: {page: 2}
     	expect(assigns(:news).first.id).to eq(11)
     end
 
-    it 'should display records based on search values' do
-    	@new = FactoryBot.create(:new, title: 'Firose')
-    	get :index, params: {term: 'firose'}
-    	expect(assigns(:news).count).to eq(1)
-    	expect(New.all.count).to eq(273)
+    it 'should display first 10 records at initial' do
+    	get :index
+    	expect(assigns(:news).count).to eq(10)
     end
-
+# negative
     it 'should not display records if search not found in table' do
+    	@new = FactoryBot.create(:new, title: 'Firose')
     	get :index, params: {term: 'yyy'}
     	expect(assigns(:news).count).to eq(0)
-    	expect(New.all.count).to eq(272)
+    	expect(New.all.count).to eq(273)
     end
+    it 'should display records of the last page according to the count of the record ' do
+    	@new = FactoryBot.create(:new, author: 'lil')
+    	get :index, params: {page: 28}
+    	expect(assigns(:news).count).to eq(3)
+    end
+    it 'should not display records if the page number is incorrect' do
+    	@new = FactoryBot.create(:new, author: 'lil')
+    	get :index, params: {page: 100}
+    	expect(assigns(:news).count).to eq(0)
+    end
+  end
+
+  describe '#show' do
+  	it 'should display the content by id' do
+    	new1 = FactoryBot.create(:new, author: 'lil', content: 'Test Content')
+    	get :show, params: {id: new1.id}
+    	expect(assigns(:new).author).to eq('lil')
+    	expect(assigns(:new).content).to eq(new1.content)
+    end
+
   end
 end
 

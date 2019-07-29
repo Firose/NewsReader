@@ -6,6 +6,10 @@ class NewsController < ApplicationController
 	end
 
   def show
-  	@new = New.find params[:id]
+  	begin
+  		@new = New.find params[:id]
+  	rescue => e
+  		@new = nil
+  	end
   end
 end
