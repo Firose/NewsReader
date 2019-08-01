@@ -1,7 +1,43 @@
+<link rel="stylesheet" href="assets/jquery.raty.css">
+<script src="/assets/jquery.raty.js"></script>
+
 <div class="container">
   <h3><%= @new.title %></h3>
   <%= link_to '<button type="button">Back</button>'.html_safe, news_index_path %>
+  <%= link_to '<button type="button">Rating</button>'.html_safe, "/news/#{@new.id}/ratings" %> 
   <p>
     <%= @new.content.html_safe %>
   </p>
-</div>
+
+
+	<table>
+  <thead>
+    <tr>
+      <th>Rating</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @all_rating.each do |rating| %>
+    <tr>
+    	<td><b><%= rating.user.email  %></b> <span><%= rating.created_at.to_date %></span></td>
+    </tr>
+      <tr>
+        <td><div class="star-rating" data-score=<%= rating.rating_value %>></div></td>
+      </tr>
+      <tr>
+      	<td><%= rating.comments %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<script>
+$('.star-rating').raty({
+readOnly: true,
+score: function() {
+return $(this).attr('data-score');
+},
+path: '/assets/'
+});
+</script>

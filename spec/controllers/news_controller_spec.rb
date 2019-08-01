@@ -11,7 +11,7 @@ RSpec.describe NewsController, type: :controller do
     	expect(New.all.count).to eq(274)
     end
 
-     it 'should display values according to page number' do
+    it 'should display values according to page number' do
     	get :index, params: {page: 2}
     	expect(assigns(:news).first.id).to eq(11)
     end
@@ -38,7 +38,6 @@ RSpec.describe NewsController, type: :controller do
     	expect(assigns(:news).count).to eq(0)
     end
   end
-
   describe '#show' do
   	it 'should display the content by id' do
     	new1 = FactoryBot.create(:new, author: 'lil', content: 'Test Content')
@@ -47,6 +46,11 @@ RSpec.describe NewsController, type: :controller do
     	expect(assigns(:new).content).to eq(new1.content)
     end
 
+    it 'should not display content if the id is incorrect' do
+      # new2 = FactoryBot.create(:new, title: 'abc')
+    	get :show, params: {id: 1000}
+			expect(response.status).to eq(200)
+    end
   end
 end
 

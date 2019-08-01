@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_07_20_141030) do
+ActiveRecord::Schema.define(version: 2019_08_01_074718) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
@@ -57,6 +57,17 @@ ActiveRecord::Schema.define(version: 2019_07_20_141030) do
     t.text "hash"
   end
 
+  create_table "ratings", force: :cascade do |t|
+    t.bigint "new_id"
+    t.bigint "user_id"
+    t.integer "rating_value"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.text "comments"
+    t.index ["new_id"], name: "index_ratings_on_new_id"
+    t.index ["user_id"], name: "index_ratings_on_user_id"
+  end
+
   create_table "rss_feeds", force: :cascade do |t|
     t.string "name"
     t.string "url"
@@ -72,14 +83,11 @@ ActiveRecord::Schema.define(version: 2019_07_20_141030) do
   end
 
   create_table "users", force: :cascade do |t|
+    t.string "email"
+    t.string "password_digest"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "email", null: false
-    t.string "encrypted_password", limit: 128, null: false
-    t.string "confirmation_token", limit: 128
-    t.string "remember_token", limit: 128, null: false
-    t.index ["email"], name: "index_users_on_email"
-    t.index ["remember_token"], name: "index_users_on_remember_token"
+    t.index ["email"], name: "index_users_on_email", unique: true
   end
 
 end

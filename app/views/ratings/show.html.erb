@@ -1,0 +1,30 @@
+<h1>rating</h1>
+	<table>
+  <thead>
+    <tr>
+      <th>Rating</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @all_rating.each do |rating| %>
+      <tr>
+        <td><div class="all-rating" data-score=<%= rating.rating_value %>></div></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<script>
+    $('.star-rating').raty({
+      path: '/assets/',
+      start: <%= @rating %>
+  });
+  $('.all-rating').raty({
+      path: '/assets/',
+      readOnly:  true,
+      score: function() {
+      	return $(this).attr('data-score');
+      }
+  });
+</script>

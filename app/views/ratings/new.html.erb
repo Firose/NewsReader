@@ -1,0 +1,27 @@
+
+<%= form_tag ratings_path(id: @new.id) do |form| %>
+  <div class="field">
+    <%= label_tag :rating %>
+    <div class="star-rating" data-score=<%= @rating %>></div>
+  </div>
+  <div class="field">
+  	<%= label_tag :comments %>
+    <%= text_field_tag :comments %>
+  </div>
+
+  <div class="actions">
+    <%= submit_tag "Submit Rating" %>
+  </div>
+<% end %>
+
+<link rel="stylesheet" href="assets/jquery.raty.css">
+<script src="/assets/jquery.raty.js"></script>
+
+<script>
+    $('.star-rating').raty({
+      path: '/assets/',
+      score: function() {
+        return $(this).attr('data-score');
+    }
+  });
+</script>
