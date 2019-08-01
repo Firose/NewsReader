@@ -12,8 +12,8 @@ class NewsController < ApplicationController
   def show
   	if current_user
   		@new = New.find params[:id]
-  		rating = @new.rating.map {|r| r if r.user_id == current_user.id}.compact.first
-  		@rating = rating.present? ? rating.rating_value : 0
+  		# rating = @new.rating.map {|r| r if r.user_id == current_user.id}.compact.first
+  		# @rating = rating.present? ? rating.rating_value : 0
   		@all_rating = @new.rating
   	else
   		redirect_to '/login'
