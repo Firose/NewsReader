@@ -1,0 +1,20 @@
+<div>
+<h3>User Log</h3>
+<table>
+<% @userlog.each_with_index do |log, idx| %>
+	<tr><th>News Title: </th><td><b><%= link_to log.new.title, "/news/#{log.new_id}" %></b></td></tr>
+	<tr><th>Rating: </th><td><div id=<%= "star-rating"+idx.to_s %> class="class-rating" data-score=<%= log.rating_value %>></td></tr>
+	<tr><th>Comments: </th><td><b><%= log.comments %></b></td></tr>
+	<br>
+<% end %>
+</table>
+</div>
+<script>
+  $('.class-rating').each(function (index, value) {
+    $("#"+ $(this).attr('id')).raty({
+      readOnly: true,
+      start: $("#" + $(this).attr('id')).attr('data-score'),
+      path: '/assets/'
+    });
+  });
+</script>

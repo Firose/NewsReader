@@ -28,6 +28,10 @@ class UsersController < ApplicationController
 
     redirect_to '/'
   end
+  def userlog
+    @userlog = User.find(params[:id]).rating
+  end
+
 
   # PATCH/PUT /users/1
   # PATCH/PUT /users/1.json
