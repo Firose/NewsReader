@@ -5,7 +5,7 @@ class NewsController < ApplicationController
 			page  = params[:page].presence || 1
 			@news = news.page(page).per(10).order(:id)
 		else
-			redirect_to '/login'
+			redirect_to login_path
 		end
 	end
 
@@ -16,7 +16,7 @@ class NewsController < ApplicationController
   		# @rating = rating.present? ? rating.rating_value : 0
   		@all_rating = @new.rating
   	else
-  		redirect_to '/login'
+  		redirect_to login_path
   	end
   end
 end

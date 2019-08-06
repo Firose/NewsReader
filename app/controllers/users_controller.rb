@@ -24,10 +24,11 @@ class UsersController < ApplicationController
   # POST /users
   # POST /users.json
   def create
-    @user = User.new(user_params)
+    @user = User.create(user_params)
 
     redirect_to '/'
   end
+
   def userlog
     @userlog = User.find(params[:id]).rating
   end

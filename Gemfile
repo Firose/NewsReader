@@ -14,6 +14,7 @@ gem 'autoprefixer-rails'
 gem 'kaminari'
 gem 'pg_search'
 gem 'rails-controller-testing'
+gem 'faker', '~> 2.1'
 group :assets do
   gem 'sass-rails', '~> 5.0'
   gem 'uglifier', '>= 1.3.0'
@@ -77,6 +78,7 @@ group :test do
   gem 'selenium-webdriver'
   # Easy installation and use of chromedriver to run system tests with Chrome
   gem 'chromedriver-helper'
+  gem 'shoulda-matchers'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
